@@ -27,4 +27,10 @@ class UserResource extends JsonResource
             'resources.with'
         );
     }
+
+    public function withResponse($request, $response)
+    {
+        $response->header('X-Token', '123456789');
+    }
+
 }
