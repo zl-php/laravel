@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,7 +49,41 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
-        });
+            Log::channel('api_error')->error('', [
+                    'errcode'           => $e->getCode(),
+                    'message'           => $e->getMessage(),
+                    'request_params'    => request()->all(),
+                    'path'              => request()->path(),
+                    'method'            => request()->method(),
+                    'http_referer'      => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
+                    'ip'                => request()->getClientIp()
+                ]
+            );
+        })->stop();
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            throw new HttpRequestException($this->getErrorMessage('not_found'), 404);
+        }  elseif ($exception instanceof ThrottleRequestsException) {
+            throw new HttpRequestException($this->getErrorMessage('request_frequent'), 429);
+        }  elseif ($exception instanceof MethodNotAllowedHttpException) {
+            throw new HttpRequestException($this->getErrorMessage('method_not_allowed'), 405);
+        }
+
+        return parent::render($request, $exception);
+    }
+
+    // 输出提示文字
+    protected function getErrorMessage($key)
+    {
+        $message = [
+            'method_not_allowed'    => '请求的方式不被允许.',
+            'not_found'             => '请求的方法不存在.',
+            'request_frequent'      => '请求频繁.'
+        ];
+
+        return $message[$key] ?? '服务器错误';
     }
 }

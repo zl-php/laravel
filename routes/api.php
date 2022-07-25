@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\TestController;
+
+Route::controller(IndexController::class)->group(function () {
+    Route::get('index', 'index');
+});
+
+Route::controller(TestController::class)->group(function () {
+    Route::get('test', 'test');
 });
