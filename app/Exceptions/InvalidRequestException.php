@@ -16,7 +16,7 @@ class InvalidRequestException extends Exception
     {
         $result =  config('app.debug') ? [
             'errcode' => $this->getCode(),
-            'message' => $this->getMessage(),
+            'errmsg' => $this->getMessage(),
             'data' => [],
             'exception' => get_class($this),
             'file' => $this->getFile(),
@@ -26,7 +26,7 @@ class InvalidRequestException extends Exception
             })->all(),
         ] : [
             'errcode' => $this->getCode(),
-            'message' => $this->getMessage(),
+            'errmsg' => $this->getMessage(),
             'data' => []
         ];
 

@@ -48,18 +48,7 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            Log::channel('api_error')->error('', [
-                    'errcode'           => $e->getCode(),
-                    'message'           => $e->getMessage(),
-                    'request_params'    => request()->all(),
-                    'path'              => request()->path(),
-                    'method'            => request()->method(),
-                    'http_referer'      => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
-                    'ip'                => request()->getClientIp()
-                ]
-            );
-        })->stop();
+        $this->reportable(function (InvalidRequestException $e) {})->stop();
     }
 
     public function render($request, Throwable $exception)

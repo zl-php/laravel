@@ -21,7 +21,7 @@ class RequestLogMiddleware
         $response = $next($request);
         $time2 = microtime(true);
 
-        Log::channel('api_success')->info('', [
+        Log::channel('api_info')->info('', [
             'path'    => $request->path(),
             'method'  => $request->method(),
             'request' => $request->all(),

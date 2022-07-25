@@ -118,18 +118,11 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
-        'api_success' => [
+        'api_info' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/api_success.log'),
+            'path' => storage_path('logs/api_info.log'),
             'level' => 'info',
-            'days' => 3,
-        ],
-
-        'api_error' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/api_error.log'),
-            'level' => 'info',
-            'days' => 3,
+            'days' => 7,
         ]
     ],
 

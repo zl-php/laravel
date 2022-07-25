@@ -6,7 +6,4 @@ return [
         'errcode' => 0,
         'errmsg' => 'ok'
     ]
-
-
-
 ];
