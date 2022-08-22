@@ -11,6 +11,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "pimple/pimple": "^3.5",
         "rap2hpoutre/laravel-log-viewer": "^2.2"
     },
     "require-dev": {
@@ -26,7 +27,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Zuogechengxu\\Wechat\\": "packags/wechat/src/"
         }
     },
     "autoload-dev": {
