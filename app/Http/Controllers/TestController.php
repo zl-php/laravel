@@ -9,6 +9,11 @@ class TestController extends Controller
 {
     public function test()
     {
+
+        echo 'test';
+
+
+        /*
         $name = 'zhiguodu(xxxx）';
 
         // 1.不管有没有括号，无差别替换中文括号至英文括号
@@ -19,6 +24,6 @@ class TestController extends Controller
             $relname =  $result[1][0];
 
         echo $relname;
-
+        */
     }
 }

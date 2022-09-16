@@ -27,7 +27,7 @@ class WechatController extends Controller
     {
         $app = Factory::work($this->config);
 
-        $result = $app->message->setTemplateCard(['aa'=>1], 'text_notice')->toUser('xxxx')->send();
+        $result = $app->access_token->getAccessToken();
 
         dd($result);
     }
