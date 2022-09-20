@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WechatController;
+use App\Http\Controllers\RedisController;
 
 Route::controller(IndexController::class)->group(function () {
     Route::get('index', 'index');
@@ -29,3 +30,8 @@ Route::controller(TestController::class)->group(function () {
 Route::controller(WechatController::class)->group(function () {
     Route::get('wechat', 'test');
 });
+
+Route::controller(RedisController::class)->group(function () {
+    Route::get('redis', 'publish');
+});
+
