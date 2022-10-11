@@ -32,8 +32,8 @@ class RedisSubscribe extends Command
         ini_set('default_socket_timeout', -1);
 
         $redis = Redis::connection('publisher');
-        $redis->subscribe(['test-channel'], function ($data, $message) {
-            echo $data;
+        $redis->psubscribe(['*'], function ($message, $channel) {
+            echo $message. PHP_EOL.$channel;
         });
     }
 }
