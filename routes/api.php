@@ -18,6 +18,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WechatController;
 use App\Http\Controllers\RedisController;
+use App\Http\Controllers\RbacController;
 
 Route::controller(IndexController::class)->group(function () {
     Route::get('index', 'index');
@@ -33,5 +34,10 @@ Route::controller(WechatController::class)->group(function () {
 
 Route::controller(RedisController::class)->group(function () {
     Route::get('redis', 'publish');
+});
+
+Route::controller(RbacController::class)->group(function () {
+    Route::get('rbac/run', 'run');
+    Route::get('rbac/test', 'test');
 });
 
